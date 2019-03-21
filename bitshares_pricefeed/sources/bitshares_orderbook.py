@@ -267,7 +267,8 @@ class BitsharesOrderbook(FeedSource):
             :return tuple: Tuple with market center price as float, volume in buy or sell side which is lower
         """
         center_price = None
-        if depth_pct and not (base_amount or quote_amount):
+        if depth_pct:
+            # depth_pct has precedence over xxx_amount
             buy_price, buy_volume = self.get_market_buy_price_pct_depth(market, depth_pct=depth_pct)
             sell_price, sell_volume = self.get_market_sell_price_pct_depth(market, depth_pct=depth_pct)
         elif base_amount or quote_amount:
