@@ -509,7 +509,7 @@ class Feed(object):
         elif target_price_algorithm == 'limit_price_rise':
             # If price of BACKING_ASSET/ASSET rises too high, limit price movement to defined %
             current_feed = self.get_my_current_feed(asset)
-            target_price_lpr_max_diff = self.assetconf(symbol, "target_price_lpr_max_diff")
+            target_price_lpr_max_diff = self.assetconf(symbol, "target_price_lpr_max_diff") / 100
 
             if current_feed and "settlement_price" in current_feed:
                 old_price = float(current_feed["settlement_price"])
