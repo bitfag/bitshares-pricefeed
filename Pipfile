@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+bitshares = "*"
+uptick = "*"
+prettytable = "*"
+click = "*"
+colorama = "*"
+tqdm = "*"
+pyyaml = "*"
+quandl = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
