@@ -2,7 +2,7 @@
 confirm: False
 
 # The producer name(s)
-producer: foo
+producer: viz-mpa
 
 exchanges:
   xchng_viz_books:
@@ -14,39 +14,56 @@ exchanges:
       - RUBLE
       - RUDEX.GOLOS
     aliases:
-      XCHNG.VIZ: HERTZ
-    #quote_volume: 1000
-    depth_pct: 15
-    mode: buy_support
-    #mode: center_price
+      XCHNG.VIZ: VIZBTS
+    quote_volume: 1000
+    depth_pct: 30
+    #mode: buy_support
+    mode: center_price
+
+  vizbts_books:
+    klass: BitsharesOrderbook
+    quotes:
+      - VIZBTS
+    bases:
+      - BTS
+      - RUBLE
+      - RUDEX.GOLOS
+    depth_pct: 20
+    #mode: buy_support
+    mode: center_price
+
   bitshares:
-    klass: Graphene
+    #klass: Graphene
+    klass: BitsharesOrderbook
     quotes:
       - BTS
       - RUBLE
     bases:
       - RUBLE
       - RUDEX.GOLOS
+    mode: center_price
+    #quote_volume: 1000
+    depth_pct: 15
 
 assets:
   VIZBTS:
         # max age of a feed
-        maxage: 43200
+        maxage: 6220800
 
         # minimum percentage that forces a publish
-        min_change: 0.5
+        min_change: 1
 
         # warn if price change goes above this percentage
-        warn_change: 2
+        warn_change: 10
 
         # skip publishing a feed if price goes above this percentage
-        skip_change: 25
+        skip_change: 40
 
         # Basic Price setup
         ###################
         # how to derive a single price from several sources
         # Choose from: "median", "mean", or "weighted" (by volume)
-        metric: mean
+        metric: weighted
 
         # Select sources for this particular asset. Each source
         # has its own fetch() method and collects several markets
@@ -59,22 +76,27 @@ assets:
             - "*"
         
         # Maximum short squeeze ratio
-        maximum_short_squeeze_ratio: 110.0
+        maximum_short_squeeze_ratio: 112.0
 
         # maintenance collateral ratio (percentage)
-        maintenance_collateral_ratio: 175.0
+        maintenance_collateral_ratio: 200.0
+
+        global_settlement_protection: true
 
         # Core exchange factor for paying transaction fees in
-        # non-BTS assets. Premium of 5%
+        # non-BTS assets. Premium of 20%
         core_exchange_factor: 1.20
 
         # If set to True, prices are also derived via 3
         # markets instead of just two:
         # E.g.: GOLD:USD -> USD:BTC -> BTC:BTS = GOLD:BTS
-        #derive_across_3markets: True
+        derive_across_3markets: True
 
-        #target_price_algorithm: limit_price_rise
-        #target_price_lpr_max_diff: 0.05
+        target_price_algorithm: limit_price_rise
+        target_price_lpr_max_diff: 30
+
+        # When deriving price across several markets, limit final volume by the step with minimal volume
+        derive_across_markets_apply_volume_limit: true
 
 
 intermediate_assets:
