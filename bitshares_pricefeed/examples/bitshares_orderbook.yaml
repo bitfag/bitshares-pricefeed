@@ -51,7 +51,7 @@ assets:
         maxage: 6220800
 
         # minimum percentage that forces a publish
-        min_change: 1
+        min_change: 0.9
 
         # warn if price change goes above this percentage
         warn_change: 10
@@ -93,7 +93,7 @@ assets:
         derive_across_3markets: True
 
         target_price_algorithm: limit_price_rise
-        target_price_lpr_max_diff: 30
+        target_price_lpr_max_diff: 1
 
         # When deriving price across several markets, limit final volume by the step with minimal volume
         derive_across_markets_apply_volume_limit: true
